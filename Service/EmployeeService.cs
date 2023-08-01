@@ -59,7 +59,7 @@ namespace EmployeeTax.Service
                 double cess = 0.02;
 
                 if(Yearlysalary >= 250000){
-                    cess = Yearlysalary * cess ;
+                    cess = (Yearlysalary - 250000)* cess ;
                    
                 }
 
