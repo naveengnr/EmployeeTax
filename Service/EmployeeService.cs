@@ -38,10 +38,18 @@ namespace EmployeeTax.Service
 
             else
             {
-                
+                DateTime presentDate = DateTime.Now;
+                TimeSpan employmentDuration = presentDate - Employee.DOJ;
+
+                var days = employmentDuration.Days;
+
+                var months = days/30;
+                double Salaryperday = Employee.Salary / 30;
 
                 var Yearlysalary = Employee.Salary * 12 ;
                 double  tax = 0.0;
+                var Totalsalary = days * Salaryperday;
+                if(months > 12){
 
                  if(Yearlysalary >= 250000 && Yearlysalary <= 500000){
                      tax = Yearlysalary * 0.05 ;
@@ -52,18 +60,33 @@ namespace EmployeeTax.Service
                    
                 }
                 else if (Yearlysalary >= 750000 && Yearlysalary <= 100000){
-                     tax = Yearlysalary * 0.20 ;
+                     tax = Yearlysalary  * 0.20 ;
                  
+                }
+                }
+
+                else{
+
+                   if(Totalsalary >= 250000 && Totalsalary <= 500000){
+                     tax = Totalsalary * 0.05 ;
+                    
+                }
+                else if (Totalsalary >= 500000 && Totalsalary <= 750000){
+                     tax = Totalsalary * 0.10 ;
+                   
+                }
+                else if (Totalsalary >= 750000 && Totalsalary <= 100000){
+                     tax = Totalsalary  * 0.20 ;
+                 
+                }
                 }
 
                 double cess = 0.02;
 
                 if(Yearlysalary >= 250000){
-                    cess = (Yearlysalary - 250000)* cess ;
+                    cess = (Yearlysalary - 250000) * cess ;
                    
                 }
-
-                double Salaryperday = Employee.Salary / 30;
 
                var result = new {
 
@@ -71,6 +94,7 @@ namespace EmployeeTax.Service
                 Firstname = Employee.Firstname,
                 Lastname = Employee.Lastname,
                 Yearlysalary = Yearlysalary,
+                Totalsalary = Totalsalary,
                 monthlysalary = Employee.Salary,
                 Salaryperday = Salaryperday,
                 taxamount = tax,
