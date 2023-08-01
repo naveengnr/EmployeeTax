@@ -38,6 +38,8 @@ namespace EmployeeTax.Service
 
             else
             {
+
+                var finalsalary = 0.0 ;
                 DateTime presentDate = DateTime.Now;
                 TimeSpan employmentDuration = presentDate - Employee.DOJ;
 
@@ -49,42 +51,33 @@ namespace EmployeeTax.Service
                 var Yearlysalary = Employee.Salary * 12 ;
                 double  tax = 0.0;
                 var Totalsalary = days * Salaryperday;
-                if(months > 12){
 
-                 if(Yearlysalary >= 250000 && Yearlysalary <= 500000){
-                     tax = Yearlysalary * 0.05 ;
-                    
+                if(months < 12 ){
+                    finalsalary = Totalsalary ;
                 }
-                else if (Yearlysalary >= 500000 && Yearlysalary <= 750000){
-                     tax = Yearlysalary * 0.10 ;
-                   
-                }
-                else if (Yearlysalary >= 750000 && Yearlysalary <= 100000){
-                     tax = Yearlysalary  * 0.20 ;
-                 
-                }
-                }
-
                 else{
+                    finalsalary = Yearlysalary ;
+                }
+                
 
-                   if(Totalsalary >= 250000 && Totalsalary <= 500000){
-                     tax = Totalsalary * 0.05 ;
+                 if(finalsalary >= 250000 && finalsalary <= 500000){
+                     tax = finalsalary * 0.05 ;
                     
                 }
-                else if (Totalsalary >= 500000 && Totalsalary <= 750000){
-                     tax = Totalsalary * 0.10 ;
+                else if (finalsalary >= 500000 && finalsalary <= 750000){
+                     tax = finalsalary * 0.10 ;
                    
                 }
-                else if (Totalsalary >= 750000 && Totalsalary <= 100000){
-                     tax = Totalsalary  * 0.20 ;
+                else if (finalsalary >= 750000 && finalsalary <= 100000){
+                     tax = finalsalary  * 0.20 ;
                  
                 }
-                }
+                
 
                 double cess = 0.02;
 
-                if(Yearlysalary >= 250000){
-                    cess = (Yearlysalary - 250000) * cess ;
+                if(finalsalary >= 250000){
+                    cess = (finalsalary - 250000) * cess ;
                    
                 }
 
